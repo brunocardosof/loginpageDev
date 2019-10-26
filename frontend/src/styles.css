@@ -1,0 +1,9 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~material-design-icons/iconfont/material-icons.css';
+.image {
+    height: auto;
+    background-size: 100%;
+    width: auto;
+    background-image: url("./assets/image/background.jpg");
+    background-position: 50% 50%;
+  }

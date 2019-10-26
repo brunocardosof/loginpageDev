@@ -1,0 +1,14 @@
+.example-header-image {
+  background-image: url("../../../assets/image/image-title-login.png");
+  background-size: cover;
+}
+
+.card-header, .card-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+}
+
+.indexRow {
+  padding-top: 150px
+}

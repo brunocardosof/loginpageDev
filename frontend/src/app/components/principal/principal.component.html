@@ -1,0 +1,164 @@
+<mat-card class="card-auth">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title mx-auto"
+      >Lista dos Usuários
+    </mat-card-title>
+    <button (click)="logout()" title="Logout" mat-mini-fab color="warn" class="ml-auto">
+      <i class="material-icons mx-auto my-auto">exit_to_app</i>
+    </button>
+  </mat-card-header>
+  <mat-card-content class="card-content mt-3">
+    <div class="body table-responsive">
+      <table id="tableListUsuario" class="table table-hover">
+        <thead class="text-center">
+          <tr>
+            <th style="display:none">ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dados of usuarioObj" class="text-center">
+            <td style="display:none">{{ dados.id }}</td>
+            <td>{{ dados.nome }}</td>
+            <td>
+              <button
+                title="Editar Usuario"
+                mat-mini-fab
+                color="basic"
+                class="mr-2"
+                (click)="openModalUpdate(dados)"
+              >
+                <i class="material-icons mx-auto my-auto">edit</i>
+              </button>
+              <button
+                title="Excluir Usuario"
+                mat-mini-fab
+                color="warn"
+                class="mr-2"
+                (click)="delete(dados.id, dados.nome)"
+              >
+                <i class="material-icons mx-auto my-auto">delete</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="text-center">
+    <button
+      title="Adicionar Usuario"
+      mat-raised-button
+      color="basic"
+      (click)="openModalInsert()"
+    >
+      <i class="material-icons mx-auto my-auto">add</i>
+      Adicionar Usuario
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<div
+  class="modal fade modalUsuario"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalIdLabel"
+  backdrop="static"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:red; color:white">
+        <div *ngIf="post" class="modal-title mx-auto"><h3>Cadastrar Usuário</h3></div>
+        <div *ngIf="!post" class="modal-title mx-auto"><h3>Atualizar Usuário</h3></div>
+      </div>
+      <div class="modal-body mx-auto">
+        <div class="row">
+          <div class="col-md-12">
+            <form [formGroup]="registerForm">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    placeholder="Nome"
+                    type="text"
+                    formControlName="nome"
+                    [ngClass]="{ 'is-invalid': submitted && f.nome.errors }"
+                  />
+                </mat-form-field>
+                <div *ngIf="submitted && f.nome.errors" class="alert alert-danger">
+                  <div *ngIf="f.nome.errors.required">Cadastre o Nome</div>
+                  <div *ngIf="f.nome.errors.minlength">Mínimo permitido é de 3 caracteres</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    placeholder="Email"
+                    type="email"
+                    formControlName="email"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                  />
+                </mat-form-field>
+                <div *ngIf="submitted && f.email.errors" class="alert alert-danger">
+                  <div *ngIf="f.email.errors.required">Cadastre o Email</div>
+                  <div *ngIf="f.email.errors.email">Email Inválido</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="password"
+                    placeholder="Senha"
+                    formControlName="password_hash"
+                    [ngClass]="{ 'is-invalid': submitted && f.password_hash.errors }"
+                  />
+                </mat-form-field>
+                <div *ngIf="submitted && f.password_hash.errors" class="alert alert-danger">
+                  <div *ngIf="f.password_hash.errors.required">Cadastre a Senha</div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="password"
+                    placeholder="Confirmar Senha"
+                    formControlName="confirmPassword"
+                    [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                  />
+                </mat-form-field>
+                <div *ngIf="submitted && f.confirmPassword.errors" class="alert alert-danger">
+                  <div *ngIf="f.confirmPassword.errors.required">Cadastre a Senha</div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="post" (click)="insert()" title="Salvar" mat-mini-fab color="basic" class="mr-2">
+          <i class="material-icons mx-auto my-auto">add</i>
+        </button>
+        <button *ngIf="!post" (click)="update()" title="Atualizar" mat-mini-fab color="basic" class="mr-2">
+          <i class="material-icons mx-auto my-auto">edit</i>
+        </button>
+        <button
+          (click)="closeCleanModal()"
+          title="Fechar"
+          mat-mini-fab
+          color="warn"
+          class="mr-2"
+        >
+          <i class="material-icons mx-auto my-auto">close</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
