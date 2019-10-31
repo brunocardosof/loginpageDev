@@ -1,5 +1,9 @@
 ![](gif.gif)<br/><br/>
 
+# Usuário Padrão <br />
+Email: admin@admin.com.br<br />
+Senha: 123123<br />
+
 # Especificações do Projeto:<br />
 Backend: node.js - Express - Sequelize ORM<br />
 
@@ -40,10 +44,6 @@ npx sequelize db:seed:all<br />
 
 Iniciar o backend em desenvolvimento<br />
 npm run dev<br />
-
-# Usuário Padrão <br />
-Email: admin@admin.com.br<br />
-Senha: 123123<br />
 
 # Mais informações <br />
 https://trello.com/b/tvFPs6hk/login-page
