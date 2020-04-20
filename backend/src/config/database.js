@@ -1,6 +1,6 @@
 // Development DB
 module.exports = {
-    host: 'loginpage.cjn44icrwcna.us-east-1.rds.amazonaws.com',
+    host: 'vps20407.publiccloud.com.br',
     username: 'postgres',
     password: 'loginpage',
     database: 'loginpage',
