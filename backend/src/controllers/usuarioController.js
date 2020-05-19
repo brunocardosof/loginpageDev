@@ -1,4 +1,5 @@
 const Usuario = require("../models/Usuario")
+const bcrypt = require('bcrypt')
 
 module.exports = {
   async index(req, res) {
@@ -28,7 +29,7 @@ module.exports = {
       nome,
       email,
       telefone,
-      password,
+      password: bcrypt.hashSync(password, 8),
     })
       .then(data => {
         return res.status(200).json(data)
@@ -40,12 +41,11 @@ module.exports = {
 
   async update(req, res) {
     const id = req.params.id
-    const { nome, email, telefone, password } = req.body
+    const { nome, email, telefone } = req.body
     await Usuario.update({
       nome,
       email,
       telefone,
-      password,
     },
       {
         where: { id: id }
