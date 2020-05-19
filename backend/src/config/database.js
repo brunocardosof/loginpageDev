@@ -2,6 +2,7 @@
 module.exports = {
     host: 'vps20407.publiccloud.com.br',
     username: 'postgres',
+    port: 5433,
     password: 'loginpage',
     database: 'loginpage',
     dialect: 'postgres',
@@ -9,7 +10,6 @@ module.exports = {
     define: {
         timestaps: true,
         underscored: true, //Transforma formato camelCase in underline EX: userGroup = user_group
-        underscordAll: true
     },
 }
 
