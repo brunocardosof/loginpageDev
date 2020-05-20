@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      is_social_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto align-self-center">
+            <div id="cardSignin" class="card card-block">
+                <div class="card-header card-header-icon card-header-info">
+                    <div class="card-icon">
+                        <i class="material-icons">https</i>
+                        <!-- <i class="material-icons" *ngIf="!loading">https</i>
+                        <i class="material-icons" *ngIf="loading">lock_open</i> -->
+                    </div>
+                    <h4 class="card-title">Authenticacation</h4>
+                </div>
+                <div class="card-body mx-auto">
+                    <div class="row">
+                        <form [formGroup]="registerForm">
+                            <div class="form-row">
+                                <div class="col-12 mb-2">
+                                    <input type="email" class="form-control" formControlName="email"
+                                        placeholder="Email">
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <input type="password" class="form-control" formControlName="password"
+                                        placeholder="Password">
+                                </div>
+                                <div class="col-12 mt-3 text-center">
+                                    <button (click)="signinEmail()" class="btn btn-info" type="button" style="background-color: #00bcd4;">
+                                        <img src="../../assets/img/loading3.gif" *ngIf="loading"/>
+                                        Signin
+                                    </button>
+                                    <button (click)="signinGoogle()" class="btn btn-info" type="button" style="background-color: #d73d32;">
+                                        <img src="../../assets/img/loading3.gif" *ngIf="loading"/>
+                                        Google
+                                    </button>
+                                    <button (click)="signinFacebook()" class="btn btn-info" type="button" style="background-color: #45619D;">
+                                        <img src="../../assets/img/loading3.gif" *ngIf="loading"/>
+                                        Facebook
+                                    </button>
+                                    <button (click)="signOut()" class="btn btn-info" type="button" style="background-color: #000;">
+                                        <img src="../../assets/img/loading3.gif" *ngIf="loading"/>
+                                        Logout
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

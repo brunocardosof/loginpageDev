@@ -4,6 +4,7 @@ const usuarioController = require('./controllers/usuarioController')
 const autenticacaoController = require('./controllers/autenticacaoController')
 
 routes.post('/api/autenticacao/signin',autenticacaoController.signin)
+routes.post('/api/autenticacao/signinSocialUser',autenticacaoController.signinSocialUser)
 
 routes.route('/api/usuario')
     .post(usuarioController.store)

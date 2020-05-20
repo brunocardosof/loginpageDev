@@ -24,12 +24,13 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { nome, email, telefone, password} = req.body
+    const { nome, email, telefone, password, isSocialUser } = req.body
     await Usuario.create({
       nome,
       email,
       telefone,
       password: bcrypt.hashSync(password, 8),
+      isSocialUser
     })
       .then(data => {
         return res.status(200).json(data)
@@ -70,6 +71,6 @@ module.exports = {
         return res.status(400).json(error)
       })
   }
-  
+
 }
 

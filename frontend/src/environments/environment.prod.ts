@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://3.232.214.77'
+  urlApi: "http://brunocardosoferreira.com.br/api/"
 };

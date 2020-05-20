@@ -1,47 +1,52 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
+import { RouterModule } from '@angular/router';
 
-import { MatCardModule } from "@angular/material/card";
-import { MatButtonModule } from "@angular/material/button";
-import { MatInputModule } from '@angular/material';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
-import { DataTablesModule } from 'angular-datatables';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './app.component';
 
+import {
+  AgmCoreModule
+} from '@agm/core';
 
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("438889821282-s2gikmn1bn0j1vn127d2hkgu5qbo94aq.apps.googleusercontent.com")
+  },
+  // {
+  //   id: FacebookLoginProvider.PROVIDER_ID,
+  //   provider: new FacebookLoginProvider("Facebook-App-Id")
+  // }
+]);
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { AuthenticationComponent } from "./components/authentication/authentication.component";
-import { JwtInterceptorService } from './infra/service/jwt-interceptor.service';
-import { PrincipalComponent } from './components/principal/principal.component';
-import { IndexComponent } from './components/index/index.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
-  declarations: [AppComponent, AuthenticationComponent, PrincipalComponent, IndexComponent],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
     HttpClientModule,
-    DataTablesModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    OAuthModule.forRoot()
+    RouterModule,
+    AppRoutingModule,
+    SocialLoginModule
+  ],
+  declarations: [
+    AppComponent
+
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
