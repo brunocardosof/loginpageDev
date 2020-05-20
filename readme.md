@@ -1,5 +1,3 @@
-![](gif.gif)<br/><br/>
-
 # Usuário Padrão <br />
 Email: admin@admin.com.br<br />
 Senha: 123123<br />
@@ -7,7 +5,7 @@ Senha: 123123<br />
 # Especificações do Projeto:<br />
 Backend: node.js - Express - Sequelize ORM<br />
 
-Frontend: Angular 8.0 - Angular Material<br />
+Frontend: Angular 9 - <br />
 
 Banco de Dados: postgreSQL<br />
 
@@ -45,5 +43,6 @@ npx sequelize db:seed:all<br />
 Iniciar o backend em desenvolvimento<br />
 npm run dev<br />
 
-# Mais informações <br />
-https://trello.com/b/tvFPs6hk/login-page
+# Utilizando Docker: <br />
+docker-compose up -d<br />
+Acessar brunocardosoferreira.com.br ou modificar o server_name em nginx/default.conf

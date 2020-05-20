@@ -16,10 +16,10 @@ import { AutenticacaoService } from 'app/infra/service/autenticacao.service';
 export class SigninComponent implements OnInit {
 
   public registerForm: FormGroup
+  public loading: boolean;
 
   private user: SocialUser;
   private usuario: Usuario;
-  private loggedIn: boolean;
 
   constructor(
     private autenticacaoService: AutenticacaoService,
@@ -43,8 +43,6 @@ export class SigninComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(() => {
         this.authService.authState.subscribe((user) => {
-          // this.user = user;
-          // this.loggedIn = (user != null);
           this.autenticacaoService.signinSocialUser(user).subscribe(
             signin => {
               console.log(signin)
