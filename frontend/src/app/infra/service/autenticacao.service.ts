@@ -12,36 +12,41 @@ export class AutenticacaoService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
+
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
 
   }
 
-  signin(usuario):Observable<any>{
-    return this.http.post<any>(`${environment.urlApi}autenticacao/signin`,usuario)
-    .pipe(map(user => {
-        // login successful if there's a jwt token in the response
-        if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-        }
-        return user;
-    }));
+  public get currentUserValue(): any {
+    return this.currentUserSubject.value;
   }
-  signinSocialUser(usuario):Observable<any>{
-    return this.http.post<any>(`${environment.urlApi}autenticacao/signinSocialUser`,usuario)
-    .pipe(map(user => {
+
+  signin(usuario): Observable<any> {
+    return this.http.post<any>(`${environment.urlApi}autenticacao/signin`, usuario)
+      .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
         }
         return user;
-    }));
+      }));
+  }
+  signinSocialUser(usuario): Observable<any> {
+    return this.http.post<any>(`${environment.urlApi}autenticacao/signinSocialUser`, usuario)
+      .pipe(map(user => {
+        // login successful if there's a jwt token in the response
+        if (user && user.token) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+        }
+        return user;
+      }));
   }
 }
