@@ -12,23 +12,35 @@
                 </div>
                 <div class="card-body mx-auto">
                     <div class="row">
+
+                    </div>
+                    <div class="row">
                         <form [formGroup]="registerForm">
                             <div class="form-row">
                                 <div class="col-12 mb-2">
-                                    <input type="email" class="form-control" formControlName="email"
-                                        placeholder="Email">
+                                    <input type="email" class="form-control" formControlName="email" placeholder="Email"
+                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">Digite seu email</div>
+                                        <div *ngIf="f.email.errors.email">Email inválido</div>
+                                    </div>
                                 </div>
                                 <div class="col-12 mb-2">
                                     <input type="password" class="form-control" formControlName="password"
-                                        placeholder="Password">
+                                        placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.password.errors.required">Digite sua senha</div>
+                                        </div>
                                 </div>
                                 <div class="col-12 mt-3 text-center">
-                                    <!-- <button (click)="signinEmail()" class="btn btn-info" type="button" style="background-color: #00bcd4;">
-                                        <img src="../../assets/img/loading3.gif" *ngIf="loading"/>
+                                    <button (click)="signinEmail()" class="btn btn-info" type="button"
+                                        style="background-color: #00bcd4;">
+                                        <img src="../../assets/img/loading3.gif" *ngIf="loading" />
                                         Signin
-                                    </button> -->
-                                    <button (click)="signinGoogle()" class="btn btn-info" type="button" style="background-color: #d73d32;">
-                                        <img src="../../assets/img/loading3.gif" *ngIf="loading"/>
+                                    </button>
+                                    <button (click)="signinGoogle()" class="btn btn-info" type="button"
+                                        style="background-color: #d73d32;">
+                                        <img src="../../assets/img/loading3.gif" *ngIf="loading" />
                                         Google
                                     </button>
                                     <!-- <button (click)="signinFacebook()" class="btn btn-info" type="button" style="background-color: #45619D;">
@@ -39,6 +51,10 @@
                                         <img src="../../assets/img/loading3.gif" *ngIf="loading"/>
                                         Logout
                                     </button> -->
+                                </div>
+                                <div class="col-12 mt-4 text-center">
+                                    <h4>Não possui cadastro? Clique <strong (click)="signup()"
+                                            style="cursor:pointer">aqui</strong></h4>
                                 </div>
                             </div>
                         </form>

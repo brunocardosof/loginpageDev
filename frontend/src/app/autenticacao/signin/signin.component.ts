@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { AuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
@@ -17,6 +17,7 @@ export class SigninComponent implements OnInit {
 
   public registerForm: FormGroup
   public loading: boolean;
+  public submitted = false;
 
   private user: SocialUser;
   private usuario: Usuario;
@@ -34,10 +35,11 @@ export class SigninComponent implements OnInit {
 
   createForm(): void {
     this.registerForm = this.formBuilder.group({
-      email: new FormControl(""),
-      password: new FormControl(""),
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     })
   }
+  get f() { return this.registerForm.controls; }
 
   signinGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
@@ -54,6 +56,17 @@ export class SigninComponent implements OnInit {
             })
         });
       })
+  }
+  signinEmail(): void {
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+        return;
+    }
+
+  }
+  signup(): void {
+    alert('signup')
   }
 
   signOut(): void {

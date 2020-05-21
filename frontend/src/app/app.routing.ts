@@ -3,6 +3,7 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 const routes: Routes =[
+  { path: '', redirectTo: 'autenticacao', pathMatch: 'full' },
   {
     path: 'autenticacao',
     loadChildren: () => import('./autenticacao/autenticacao.module').then(m => m.AutenticacaoModule)
