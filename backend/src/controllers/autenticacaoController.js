@@ -54,11 +54,13 @@ module.exports = {
     },
     async signup(req, res) {
         const { nome, email, telefone, password } = req.body
+        let is_social_user = 0
         await Usuario.create({
             nome,
             email,
             telefone,
             password: bcrypt.hashSync(password, 8),
+            is_social_user
         })
             .then(data => {
                 return res.status(200).json(data)

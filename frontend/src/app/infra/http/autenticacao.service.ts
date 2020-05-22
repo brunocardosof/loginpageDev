@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from 'environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
+import { Usuario } from '../models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class AutenticacaoService {
         return user;
       }));
   }
+
   signinSocialUser(usuario): Observable<any> {
     return this.http.post<any>(`${environment.urlApi}autenticacao/signinSocialUser`, usuario)
       .pipe(map(user => {
@@ -48,5 +50,9 @@ export class AutenticacaoService {
         }
         return user;
       }));
+  }
+
+  signup(usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${environment.urlApi}autenticacao/signup`,usuario)
   }
 }

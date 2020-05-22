@@ -6,6 +6,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AutenticacaoRoutingModule } from './autenticacao-routing.module';
 import { SigninModule } from './signin/signin.module';
+import { SignupModule } from './signup/signup.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { SigninModule } from './signin/signin.module';
     CommonModule,
     AutenticacaoRoutingModule,
     SigninModule,
+    SignupModule,
     FontAwesomeModule,
     SweetAlert2Module
   ]
