@@ -1,6 +1,6 @@
 # Usuário Padrão <br />
 Email: admin@admin.com.br<br />
-Senha: 123123<br />
+Senha: 123456<br />
 
 # Especificações do Projeto:<br />
 Backend: node.js - Express - Sequelize ORM<br />
