@@ -46,13 +46,13 @@ export class SignupComponent implements OnInit {
     this.loading = true;
 
     if (this.registerForm.invalid) {
+      this.loading = false;
       return;
     }
 
-    if (this.validatepassword()) {
-      this.usuario = this.registerForm.value
-      console.log(this.usuario)
-    }
+    this.validatepassword()
+
+    this.usuario = this.registerForm.value
     this.autenticacaoService.signup(this.usuario).subscribe(
       signup => {
         setTimeout(() => {
@@ -83,8 +83,9 @@ export class SignupComponent implements OnInit {
     if (password !== confirmacaoPassword) {
       Swal.fire({
         icon: 'error',
-        title: 'passwords não conferem',
+        title: 'senhas não conferem',
       })
+      this.loading = false;
       return false
     }
     return true
