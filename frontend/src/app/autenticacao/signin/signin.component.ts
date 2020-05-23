@@ -34,9 +34,6 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.autenticacaoService.currentUserValue !== null) {
-      this.router.navigate(['/home'])
-    }
     this.createForm()
   }
 
@@ -54,7 +51,6 @@ export class SigninComponent implements OnInit {
         this.authService.authState.subscribe((user) => {
           this.autenticacaoService.signinSocialUser(user).subscribe(
             signin => {
-              console.log(signin)
               this.router.navigate(['/home'])
             },
             error => {
@@ -70,7 +66,6 @@ export class SigninComponent implements OnInit {
       this.authService.authState.subscribe((user) => {
         this.autenticacaoService.signinSocialUser(user).subscribe(
           signin => {
-            console.log(signin)
             this.router.navigate(['/home'])
           },
           error => {
@@ -118,11 +113,6 @@ export class SigninComponent implements OnInit {
         }
 
       })
-  }
-  
-  signOut(): void {
-    this.authService.signOut(true)
-      .then(signOut => console.log(signOut))
   }
 
 }
