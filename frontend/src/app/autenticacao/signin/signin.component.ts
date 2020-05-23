@@ -5,7 +5,7 @@ import { AuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Usuario } from 'app/infra/models/Usuario';
 import { Router } from '@angular/router';
-import { AutenticacaoService } from 'app/infra/service/autenticacao.service';
+import { AutenticacaoService } from 'app/infra/http/autenticacao.service';
 import { Signin } from 'app/infra/models/Signin';
 import Swal from 'sweetalert2';
 
@@ -103,10 +103,7 @@ export class SigninComponent implements OnInit {
 
       })
   }
-  signup(): void {
-    alert('signup')
-  }
-
+  
   signOut(): void {
     this.authService.signOut(true)
       .then(signOut => console.log(signOut))

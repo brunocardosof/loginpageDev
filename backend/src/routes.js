@@ -5,6 +5,7 @@ const autenticacaoController = require('./controllers/autenticacaoController')
 
 routes.post('/api/autenticacao/signin',autenticacaoController.signin)
 routes.post('/api/autenticacao/signinSocialUser',autenticacaoController.signinSocialUser)
+routes.post('/api/autenticacao/signup',autenticacaoController.signup)
 
 routes.route('/api/usuario')
     .post(usuarioController.store)
