@@ -38,7 +38,6 @@ export class SigninComponent implements OnInit {
       this.router.navigate(['/home'])
     }
     this.createForm()
-    console.log(this.autenticacaoService.currentUserValue)
   }
 
   createForm(): void {
@@ -64,6 +63,23 @@ export class SigninComponent implements OnInit {
         });
       })
   }
+
+  signinFacebook(){    
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+    .then(() => {
+      this.authService.authState.subscribe((user) => {
+        this.autenticacaoService.signinSocialUser(user).subscribe(
+          signin => {
+            console.log(signin)
+            this.router.navigate(['/home'])
+          },
+          error => {
+            console.log(error)
+          })
+      });
+    })  
+  }
+
   signinEmail(): void {
     this.signin = this.registerForm.value
     this.submitted = true;
