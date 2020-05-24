@@ -29,15 +29,15 @@ export class HomeComponent implements OnInit {
         this.isSocialUser = true :
         this.isSocialUser = false
     }
-    this.userName = this.autenticacaoService.currentUserValue.nome
+    this.userName = this.autenticacaoService.currentUserValue.nome  
   }
 
   logout() {
-    this.router.navigate(['/autenticacao'])
     localStorage.removeItem('currentUser')
     if (this.isSocialUser) {
       this.authService.signOut(true)
     }
+    this.router.navigate(['/autenticacao'])
   }
 
 }
