@@ -24,12 +24,12 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { nome, email, telefone, password, foto, isSocialUser } = req.body
+    const { nome, email, telefone, senha, foto, isSocialUser } = req.body
     await Usuario.create({
       nome,
       email,
       telefone,
-      password: bcrypt.hashSync(password, 8),
+      senha: bcrypt.hashSync(senha, 8),
       foto,
       isSocialUser
     })

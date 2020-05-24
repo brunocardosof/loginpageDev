@@ -3,6 +3,6 @@ export class Usuario {
     nome: string
     email: string
     telefone?: string
-    password?: string
+    senha?: string
     isSocialUser: number
 }

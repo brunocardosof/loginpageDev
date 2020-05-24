@@ -40,7 +40,7 @@ export class SigninComponent implements OnInit {
   createForm(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      senha: ['', [Validators.required]],
     })
   }
   get f() { return this.registerForm.controls; }

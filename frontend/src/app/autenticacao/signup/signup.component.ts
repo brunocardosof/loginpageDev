@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
       nome: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       telefone: [''],
-      password: ['', [Validators.required]],
+      senha: ['', [Validators.required]],
       confirmarPassword: ['', [Validators.required]],
     })
   }
@@ -78,9 +78,9 @@ export class SignupComponent implements OnInit {
   }
 
   validatepassword(): boolean {
-    const password = this.registerForm.get("password").value
+    const senha = this.registerForm.get("senha").value
     const confirmacaoPassword = this.registerForm.get("confirmarPassword").value
-    if (password !== confirmacaoPassword) {
+    if (senha !== confirmacaoPassword) {
       Swal.fire({
         icon: 'error',
         title: 'senhas não conferem',

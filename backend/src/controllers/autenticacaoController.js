@@ -33,13 +33,13 @@ module.exports = {
         }
     },
     async signin(req, res) {
-        const { email, password } = req.body
+        const { email, senha } = req.body
         await Usuario.findOne({ where: { email } })
             .then(async data => {
                 console.log(data)
                 if (data === null) {
                     return res.status(401).json(data)
-                } else if (!(bcrypt.compareSync(password, data.password))) {
+                } else if (!(bcrypt.compareSync(senha, data.senha))) {
                     return res.status(401).json(error)
                 } else {
                     return res.status(200).json({
@@ -56,13 +56,13 @@ module.exports = {
             })
     },
     async signup(req, res) {
-        const { nome, email, telefone, password, foto } = req.body
+        const { nome, email, telefone, senha, foto } = req.body
         let is_social_user = 0
         await Usuario.create({
             nome,
             email,
             telefone,
-            password: bcrypt.hashSync(password, 8),
+            senha: bcrypt.hashSync(senha, 8),
             is_social_user
         })
             .then(data => {
