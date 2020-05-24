@@ -24,7 +24,7 @@ module.exports = {
       },
       senha: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       foto: {
         type: Sequelize.STRING,
