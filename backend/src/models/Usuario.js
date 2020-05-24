@@ -7,6 +7,7 @@ class Usuario extends Model {
             email: DataTypes.STRING,
             telefone: DataTypes.STRING,
             password: DataTypes.STRING,
+            // foto: DataTypes.STRING,
             is_social_user: DataTypes.NUMBER,
         }, {
             sequelize,

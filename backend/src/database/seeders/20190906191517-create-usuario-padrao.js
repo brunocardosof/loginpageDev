@@ -7,6 +7,7 @@ module.exports = {
       email: 'admin@admin.com.br',
       telefone: '51999999999',
       senha: bcrypt.hashSync('123456', 8),
+      foto: '',
       is_social_user: 0,
       created_at: new Date(),
       updated_at: new Date()

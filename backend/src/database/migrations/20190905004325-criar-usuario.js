@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      foto: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       is_social_user: {
         type: Sequelize.INTEGER,
         allowNull: false

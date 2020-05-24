@@ -5,13 +5,14 @@ const { authSecret } = require('../../.authSecret')
 
 module.exports = {
     async signinSocialUser(req, res) {
-        const { name, email, authToken, is_social_user = 1 } = req.body
+        const { name, email, photoUrl ,authToken, is_social_user = 1 } = req.body
         const userExists = await Usuario.findOne({ where: { email } })
         console.log(userExists)
         if (!userExists) {
             await Usuario.create({
                 nome: name,
                 email,
+                foto: photoUrl,
                 is_social_user
             })
                 .then(data => {
@@ -24,7 +25,9 @@ module.exports = {
         } else {         
             return res.status(200).json({
                 id: userExists.id,
+                nome: userExists.nome,
                 email: userExists.email,
+                isSocialUser: true,
                 token: jwt.sign(userExists.id, authSecret),
             })
         }
@@ -53,7 +56,7 @@ module.exports = {
             })
     },
     async signup(req, res) {
-        const { nome, email, telefone, password } = req.body
+        const { nome, email, telefone, password, foto } = req.body
         let is_social_user = 0
         await Usuario.create({
             nome,

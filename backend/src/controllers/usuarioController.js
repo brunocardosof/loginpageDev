@@ -24,12 +24,13 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { nome, email, telefone, password, isSocialUser } = req.body
+    const { nome, email, telefone, password, foto, isSocialUser } = req.body
     await Usuario.create({
       nome,
       email,
       telefone,
       password: bcrypt.hashSync(password, 8),
+      foto,
       isSocialUser
     })
       .then(data => {
@@ -42,11 +43,12 @@ module.exports = {
 
   async update(req, res) {
     const id = req.params.id
-    const { nome, email, telefone } = req.body
+    const { nome, email, telefone, foto } = req.body
     await Usuario.update({
       nome,
       email,
       telefone,
+      foto
     },
       {
         where: { id: id }
