@@ -21,6 +21,8 @@ services:
       - 5433:5432
     networks:
       - db
+    depends_on:
+      - backend
   frontend:
     image: nginx:1.18.0
     volumes:
@@ -39,9 +41,7 @@ services:
     image: node:12.16.2
     volumes:
       - ./backend:/backend
-    command: bash -c "cd backend && npm i && node src/server.js"
+    command: bash -c "cd backend && npm i && npx sequelize db:seed:undo:all && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && node src/server.js"
     networks:
       - db
       - web
-    depends_on:
-      - db
