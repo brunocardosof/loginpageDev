@@ -5,9 +5,8 @@ const { authSecret } = require('../../.authSecret')
 
 module.exports = {
     async signinSocialUser(req, res) {
-        const { name, email, photoUrl ,authToken, is_social_user = 1 } = req.body
+        const { name, email, photoUrl, authToken, is_social_user = 1 } = req.body
         const userExists = await Usuario.findOne({ where: { email } })
-        console.log(userExists)
         if (!userExists) {
             await Usuario.create({
                 nome: name,
@@ -16,17 +15,25 @@ module.exports = {
                 is_social_user
             })
                 .then(data => {
-                    return res.status(200).json(data)
+                    return res.status(200).json({
+                        id: data.id,
+                        nome: data.nome,
+                        email: data.email,
+                        foto: data.foto,
+                        isSocialUser: true,
+                        token: jwt.sign(data.id, authSecret),
+                    })
                 })
                 .catch(error => {
                     return res.status(400).json(error)
                 })
 
-        } else {         
+        } else {
             return res.status(200).json({
                 id: userExists.id,
                 nome: userExists.nome,
                 email: userExists.email,
+                foto: userExists.foto,
                 isSocialUser: true,
                 token: jwt.sign(userExists.id, authSecret),
             })
@@ -36,7 +43,6 @@ module.exports = {
         const { email, senha } = req.body
         await Usuario.findOne({ where: { email } })
             .then(async data => {
-                console.log(data)
                 if (data === null) {
                     return res.status(401).json(data)
                 } else if (!(bcrypt.compareSync(senha, data.senha))) {
@@ -45,13 +51,13 @@ module.exports = {
                     return res.status(200).json({
                         id: data.id,
                         nome: data.nome,
+                        foto: "",
                         email: data.email,
                         token: jwt.sign(data.id, authSecret),
                     })
                 }
             })
             .catch(error => {
-                console.log(error)
                 return res.status(400).json(error)
             })
     },

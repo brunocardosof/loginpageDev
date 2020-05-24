@@ -49,7 +49,6 @@ export class SigninComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(() => {
         this.authService.authState.subscribe((user) => {
-          console.log(user)
           this.autenticacaoService.signinSocialUser(user).subscribe(
             signin => {
               this.router.navigate(['/home'])
@@ -65,7 +64,6 @@ export class SigninComponent implements OnInit {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
     .then(() => {
       this.authService.authState.subscribe((user) => {
-        console.log(user)
         this.autenticacaoService.signinSocialUser(user).subscribe(
           signin => {
             this.router.navigate(['/home'])

@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit {
 
   private isSocialUser: Boolean = false
   
-  public userName: string = "Usuario"
+  public userName: string = ""
+  public urlImg: string = ""
 
   constructor(
     private autenticacaoService: AutenticacaoService,
@@ -25,15 +26,23 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/autenticacao'])
     }
     if (this.autenticacaoService.currentUserValue !== null) {
-      this.autenticacaoService.currentUserValue.isSocialUser ?
-        this.isSocialUser = true :
-        this.isSocialUser = false
+
+      this.autenticacaoService.currentUserValue.foto !== "" ?
+      this.urlImg = this.autenticacaoService.currentUserValue.foto : 
+      this.urlImg = "./assets/img/angular2-logo-red.png"
+      
+      this.autenticacaoService.currentUserValue.nome !== "" ?
+      this.userName = this.autenticacaoService.currentUserValue.nome : 
+      this.userName = "Usuario"
+
+
     }
-    this.userName = this.autenticacaoService.currentUserValue.nome  
   }
 
   logout() {
     localStorage.removeItem('currentUser')
+    this.userName = ""
+    this.urlImg = ""
     if (this.isSocialUser) {
       this.authService.signOut(true)
     }

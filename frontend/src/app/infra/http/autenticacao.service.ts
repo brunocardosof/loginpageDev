@@ -25,13 +25,11 @@ export class AutenticacaoService {
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
-
+  
   signin(usuario): Observable<any> {
     return this.http.post<any>(`${environment.urlApi}autenticacao/signin`, usuario)
       .pipe(map(user => {
-        // login successful if there's a jwt token in the response
         if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         }
@@ -42,9 +40,7 @@ export class AutenticacaoService {
   signinSocialUser(usuario): Observable<any> {
     return this.http.post<any>(`${environment.urlApi}autenticacao/signinSocialUser`, usuario)
       .pipe(map(user => {
-        // login successful if there's a jwt token in the response
         if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         }
