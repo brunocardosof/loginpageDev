@@ -30,7 +30,7 @@ export class AutenticacaoService {
     return this.http.post<any>(`${environment.urlApi}autenticacao/signin`, usuario)
       .pipe(map(user => {
         if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('currentUser', JSON.stringify(user.token));
           this.currentUserSubject.next(user);
         }
         return user;
@@ -41,7 +41,7 @@ export class AutenticacaoService {
     return this.http.post<any>(`${environment.urlApi}autenticacao/signinSocialUser`, usuario)
       .pipe(map(user => {
         if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('currentUser', JSON.stringify(user.token));
           this.currentUserSubject.next(user);
         }
         return user;

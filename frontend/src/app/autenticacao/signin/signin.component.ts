@@ -51,7 +51,7 @@ export class SigninComponent implements OnInit {
         this.authService.authState.subscribe((user) => {
           this.autenticacaoService.signinSocialUser(user).subscribe(
             signin => {
-              this.router.navigate(['/home'])
+              this.router.navigate(['/home',{foto: signin.foto, nome: signin.nome}])
             },
             error => {
               console.log(error)
@@ -66,7 +66,7 @@ export class SigninComponent implements OnInit {
       this.authService.authState.subscribe((user) => {
         this.autenticacaoService.signinSocialUser(user).subscribe(
           signin => {
-            this.router.navigate(['/home'])
+            this.router.navigate(['/home', {foto: signin.foto, nome: signin.nome}])
           },
           error => {
             console.log(error)
@@ -88,7 +88,7 @@ export class SigninComponent implements OnInit {
         setTimeout(() => {
           this.loading = false
           if (Object.keys(signin).length !== 0) {
-            this.router.navigate(['/home'])
+            this.router.navigate(['/home',{foto: signin.foto, nome: signin.nome}])
           } else {
             Swal.fire({
               icon: 'error',

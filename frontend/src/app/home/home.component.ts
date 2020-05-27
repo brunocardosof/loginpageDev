@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AutenticacaoService } from 'app/infra/http/autenticacao.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'angularx-social-login';
 
 @Component({
@@ -11,13 +11,14 @@ import { AuthService } from 'angularx-social-login';
 export class HomeComponent implements OnInit {
 
   private isSocialUser: Boolean = false
-  
+
   public userName: string = ""
   public urlImg: string = ""
 
   constructor(
     private autenticacaoService: AutenticacaoService,
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService,
   ) { }
 
@@ -25,19 +26,27 @@ export class HomeComponent implements OnInit {
     if (this.autenticacaoService.currentUserValue === null) {
       this.router.navigate(['/autenticacao'])
     }
+    let nome = this.route.snapshot.paramMap.get('nome')
+    let foto = this.route.snapshot.paramMap.get('foto')
     if (this.autenticacaoService.currentUserValue !== null) {
 
-      this.autenticacaoService.currentUserValue.foto !== "" ?
-      this.urlImg = this.autenticacaoService.currentUserValue.foto : 
-      this.urlImg = "./assets/img/angular2-logo-red.png"
-      
-      this.autenticacaoService.currentUserValue.nome !== "" ?
-      this.userName = this.autenticacaoService.currentUserValue.nome : 
-      this.userName = "Usuario"
+      if (foto) {
+        this.urlImg = foto
+      } else {
+        this.urlImg = "./assets/img/angular2-logo-red.png"
+      }
+
+      if (nome) {
+        this.userName = nome
+      } else {
+        this.userName = "Usuário"
+      }
 
 
     }
   }
+
+  prepareUpdateUser() { }
 
   logout() {
     localStorage.removeItem('currentUser')
