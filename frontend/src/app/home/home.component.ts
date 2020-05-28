@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AutenticacaoService } from 'app/infra/http/autenticacao.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'angularx-social-login';
+import { UsuarioService } from 'app/infra/http/usuario.service';
+import { Usuario } from 'app/infra/models/Usuario';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private autenticacaoService: AutenticacaoService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
@@ -26,9 +29,9 @@ export class HomeComponent implements OnInit {
     if (this.autenticacaoService.currentUserValue === null) {
       this.router.navigate(['/autenticacao'])
     }
-    let nome = this.route.snapshot.paramMap.get('nome')
-    let foto = this.route.snapshot.paramMap.get('foto')
     if (this.autenticacaoService.currentUserValue !== null) {
+      let nome = this.autenticacaoService.currentUserValue.nome
+      let foto = this.autenticacaoService.currentUserValue.foto
 
       if (foto) {
         this.urlImg = foto
@@ -46,16 +49,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  prepareUpdateUser() { }
+  prepareUpdateUser() {
+    const token = JSON.parse(localStorage.getItem('currentUser'))
+    this.usuarioService.getByToken(token.token).subscribe(
+      usuario => {
+        this.router.navigate(['/usuario/update'])
+      },
+      error => {
+        console.log(error)
+      })
+  }
 
   logout() {
-    localStorage.removeItem('currentUser')
-    this.userName = ""
-    this.urlImg = ""
-    if (this.isSocialUser) {
-      this.authService.signOut(true)
-    }
-    this.router.navigate(['/autenticacao'])
+    this.autenticacaoService.logout(this.isSocialUser)
   }
 
 }

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div id="cardUsuarioUpdate" class="card card-profile">
+                <app-menu class="ml-auto"></app-menu>
+                <div class="card-avatar">
+                    <a href="javascript:void(0)">
+                        <img class="img" src="./assets/img/angular.png" />
+                    </a>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="registerForm">
+
+                        <div class="form-row">
+                            <div class="col-12 mb-2">
+                                <input type="text" class="form-control" formControlName="nome" placeholder="Nome"
+                                    [ngClass]="{ 'is-invalid': submitted && f.nome.errors }">
+                                <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+                                    <div *ngIf="f.nome.errors.required">Digite seu nome</div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <input type="text" class="form-control" formControlName="telefone" placeholder="Telefone">
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
+                            <button  routerLink="/home" class="btn btn-secundary" type="button">
+                                Voltar
+                            </button>
+                            <button (click)="updateBtnClick()" class="btn btn-info" type="button"
+                                style="background-color: #00bcd4;">
+                                <img src="../../assets/img/loading3.gif" *ngIf="loading" />
+                                Update
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

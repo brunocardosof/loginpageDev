@@ -4,6 +4,8 @@ import { environment } from 'environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Usuario } from '../models/Usuario';
+import { AuthService } from 'angularx-social-login';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class AutenticacaoService {
 
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,    
+    private authService: AuthService,
+    private router: Router
   ) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -30,7 +34,7 @@ export class AutenticacaoService {
     return this.http.post<any>(`${environment.urlApi}autenticacao/signin`, usuario)
       .pipe(map(user => {
         if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user.token));
+          localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         }
         return user;
@@ -41,7 +45,7 @@ export class AutenticacaoService {
     return this.http.post<any>(`${environment.urlApi}autenticacao/signinSocialUser`, usuario)
       .pipe(map(user => {
         if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user.token));
+          localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         }
         return user;
@@ -50,5 +54,13 @@ export class AutenticacaoService {
 
   signup(usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${environment.urlApi}autenticacao/signup`,usuario)
+  }
+  
+  logout(isSocialUser) {
+    localStorage.removeItem('currentUser')
+    if (isSocialUser) {
+      this.authService.signOut(true)
+    }
+    this.router.navigate(['/autenticacao'])
   }
 }

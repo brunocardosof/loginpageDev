@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AutenticacaoService } from 'app/infra/http/autenticacao.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Usuario } from 'app/infra/models/Usuario';
 
@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   public registerForm: FormGroup
   public submitted: boolean = false
   public loading: boolean = false
+  public post: boolean = true
 
   private usuario: Usuario
 
@@ -22,11 +23,20 @@ export class SignupComponent implements OnInit {
   constructor(
     public autenticacaoService: AutenticacaoService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.createForm()
+    if(this.route.snapshot.paramMap.get('update')) {
+      this.post = false
+      this.registerForm.get('nome').setValue(this.route.snapshot.paramMap.get('nome'))
+    }
+    let nome = this.route.snapshot.paramMap.get('nome')
+    let email = this.route.snapshot.paramMap.get('email')
+    let telefone = this.route.snapshot.paramMap.get('telefone')
+    let update = this.route.snapshot.paramMap.get('update')
   }
 
   get f() { return this.registerForm.controls; }
@@ -75,6 +85,9 @@ export class SignupComponent implements OnInit {
         console.log(error)
       })
 
+  }
+  updateBtnClick(){
+    alert('UPDATE')
   }
 
   validatepassword(): boolean {

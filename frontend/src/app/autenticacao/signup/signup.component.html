@@ -1,7 +1,20 @@
 <div class="container">
     <div class="row">
         <div class="col-6 mx-auto align-self-center">
-            <div id="cardSignup" class="card card-profile">                
+            <div id="cardSignup" class="card card-profile">   
+                <ul *ngIf="!post" class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" style="color: black;">
+                            <i class="material-icons">settings</i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" style="cursor: pointer;">Update Usuario</a>
+                            <a class="dropdown-item" style="cursor: pointer;">Update Senha</a>
+                            <a class="dropdown-item" style="cursor: pointer;">Update Email</a>
+                        </div>
+                    </li>
+                </ul>             
                 <div class="card-avatar">
                     <a href="javascript:void(0)">
                         <img class="img" src="./assets/img/angular.png" />

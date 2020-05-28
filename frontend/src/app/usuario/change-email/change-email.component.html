@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div id="cardUsuarioEmail" class="card card-profile">
+                <app-menu class="ml-auto"></app-menu>
+                <div class="card-avatar">
+                    <a href="javascript:void(0)">
+                        <img class="img" src="./assets/img/angular.png" />
+                    </a>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="registerForm">
+                        <div class="form-row">
+                            <div class="col-12 mb-2">
+                                <input type="email" class="form-control" formControlName="emailAtual" placeholder="Email Atual"
+                                    [ngClass]="{ 'is-invalid': submitted && f.emailAtual.errors }">
+                                <div *ngIf="submitted && f.emailAtual.errors" class="invalid-feedback">
+                                    <div *ngIf="f.emailAtual.errors.required">Digite seu email</div>
+                                    <div *ngIf="f.emailAtual.errors.email">Digite um email válido</div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <input type="email" class="form-control" formControlName="emailNovo" placeholder="Email Novo"
+                                    [ngClass]="{ 'is-invalid': submitted && f.emailNovo.errors }">
+                                <div *ngIf="submitted && f.emailNovo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.emailNovo.errors.required">Digite seu email</div>
+                                    <div *ngIf="f.emailNovo.errors.email">Digite um email válido</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
+                            <button  routerLink="/home" class="btn btn-secundary" type="button">
+                                Voltar
+                            </button>
+                            <button (click)="updateBtnClick()" class="btn btn-info" type="button"
+                                style="background-color: #00bcd4;">
+                                <img src="../../assets/img/loading3.gif" *ngIf="loading" />
+                                Update
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

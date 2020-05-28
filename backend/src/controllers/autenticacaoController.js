@@ -21,7 +21,7 @@ module.exports = {
                         email: data.email,
                         foto: data.foto,
                         isSocialUser: true,
-                        token: jwt.sign(data.id, authSecret),
+                        token: jwt.sign(data.email, authSecret),
                     })
                 })
                 .catch(error => {
@@ -35,7 +35,7 @@ module.exports = {
                 email: userExists.email,
                 foto: userExists.foto,
                 isSocialUser: true,
-                token: jwt.sign(userExists.id, authSecret),
+                token: jwt.sign(userExists.email, authSecret),
             })
         }
     },
@@ -53,7 +53,7 @@ module.exports = {
                         nome: data.nome,
                         foto: "",
                         email: data.email,
-                        token: jwt.sign(data.id, authSecret),
+                        token: jwt.sign(data.email, authSecret),
                     })
                 }
             })

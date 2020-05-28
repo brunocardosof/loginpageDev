@@ -11,9 +11,9 @@ routes.route('/api/usuario')
     .post(usuarioController.store)
     .get(usuarioController.index)
 routes.route('/api/usuario/:id')
-    .get(usuarioController.getById)
     .put(usuarioController.update)
     .delete(usuarioController.delete)
+routes.get('/api/usuario/:token',usuarioController.getByToken)
 
 
 module.exports = routes
