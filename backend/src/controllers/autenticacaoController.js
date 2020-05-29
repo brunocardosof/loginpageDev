@@ -34,6 +34,7 @@ module.exports = {
                 nome: userExists.nome,
                 email: userExists.email,
                 foto: userExists.foto,
+                telefone: userExists.telefone,
                 isSocialUser: true,
                 token: jwt.sign(userExists.email, authSecret),
             })
@@ -53,6 +54,7 @@ module.exports = {
                         nome: data.nome,
                         foto: "",
                         email: data.email,
+                        telefone: data.telefone,
                         token: jwt.sign(data.email, authSecret),
                     })
                 }

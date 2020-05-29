@@ -16,4 +16,7 @@ export class UsuarioService {
   getByToken(token): Observable<Usuario> {
     return this.http.get<Usuario>(`${environment.urlApi}usuario/${token}`)
   }
+  update(id, usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${environment.urlApi}usuario/${id}`,usuario)
+  }
 }

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AutenticacaoService {
 
-  private currentUserSubject: BehaviorSubject<any>;
+  public currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
 

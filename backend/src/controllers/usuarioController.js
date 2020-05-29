@@ -64,10 +64,12 @@ module.exports = {
       foto
     },
       {
-        where: { id: id }
+        where: { id: id },
+        returning: true,
+        plain: true
       })
       .then(data => {
-        return res.status(200).json(data)
+        return res.status(200).json(data[1])
       })
       .catch(error => {
         return res.status(400).json(error)
