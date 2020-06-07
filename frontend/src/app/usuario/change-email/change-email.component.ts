@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import  {Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmailService } from 'app/infra/http/email.service';
 import { Email } from 'app/infra/interface/Email';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtValidatorService } from 'app/infra/http/jwt-validator.service';
