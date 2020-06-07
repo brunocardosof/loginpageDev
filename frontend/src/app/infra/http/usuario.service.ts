@@ -4,6 +4,7 @@ import { Usuario } from '../models/Usuario';
 import { Password } from "../interface/Password";
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
+import { Email } from '../interface/Email';
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +26,13 @@ export class UsuarioService {
   changePassword(id, password): Observable<Password> {
     return this.http.put<Password>(`${environment.urlApi}usuario/changePassword/${id}`,password)
   }
+
+  changeEmail(id, email): Observable<any> {
+    return this.http.put<any>(`${environment.urlApi}usuario/changeEmail/${id}`,email)
+  }
+  
+  sendLinkTochangeEmail(email): Observable<any> {
+    return this.http.post<any>(`${environment.urlApi}email`,email)
+  }
+
 }

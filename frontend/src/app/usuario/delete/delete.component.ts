@@ -26,7 +26,7 @@ export class DeleteComponent implements OnInit {
       if (result.value) {
         Swal.fire({
           icon: 'success',
-          title: 'Usuário deletado com sucesso!',
+          title: 'Usuário deletado com sucesso(Não esta deletando ainda!!!!!)',
         })
         this.router.navigate(['autenticacao'])
       }

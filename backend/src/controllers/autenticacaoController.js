@@ -9,11 +9,11 @@ module.exports = {
         const userExists = await Usuario.findOne({ where: { email } })
         if (!userExists) {
             await Usuario.create({
-                nome: name,
-                email,
-                foto: photoUrl,
-                is_social_user
-            })
+                    nome: name,
+                    email,
+                    foto: photoUrl,
+                    is_social_user
+                })
                 .then(data => {
                     return res.status(200).json({
                         id: data.id,
@@ -55,6 +55,7 @@ module.exports = {
                         foto: "",
                         email: data.email,
                         telefone: data.telefone,
+                        isSocialUser: false,
                         token: jwt.sign(data.email, authSecret),
                     })
                 }
@@ -67,12 +68,12 @@ module.exports = {
         const { nome, email, telefone, senha, foto } = req.body
         let is_social_user = 0
         await Usuario.create({
-            nome,
-            email,
-            telefone,
-            senha: bcrypt.hashSync(senha, 8),
-            is_social_user
-        })
+                nome,
+                email,
+                telefone,
+                senha: bcrypt.hashSync(senha, 8),
+                is_social_user
+            })
             .then(data => {
                 return res.status(200).json(data)
             })

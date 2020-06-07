@@ -5,7 +5,10 @@ import { ChangeEmailComponent } from './change-email.component';
 
 const routes: Routes = [ 
  { 
-   path: '', component: ChangeEmailComponent
+   path: '', component: ChangeEmailComponent,
+  },
+ { 
+   path: ':jwt', component: ChangeEmailComponent,
   }
 ];
 

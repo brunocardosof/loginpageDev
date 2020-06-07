@@ -9,19 +9,32 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form [formGroup]="registerForm">
+
+                    <form id="formNoParam" [formGroup]="registerForm" style="display: none;">
                         <div class="form-row">
                             <div class="col-12 mb-2">
-                                <input type="email" class="form-control" formControlName="emailAtual" placeholder="Email Atual"
-                                    [ngClass]="{ 'is-invalid': submitted && f.emailAtual.errors }">
+                                <input type="email" class="form-control" formControlName="emailAtual" placeholder="Email Atual" [ngClass]="{ 'is-invalid': submitted && f.emailAtual.errors }">
                                 <div *ngIf="submitted && f.emailAtual.errors" class="invalid-feedback">
                                     <div *ngIf="f.emailAtual.errors.required">Digite seu email</div>
                                     <div *ngIf="f.emailAtual.errors.email">Digite um email válido</div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
+                            <button routerLink="/home" class="btn btn-secundary" type="button">
+                                Voltar
+                            </button>
+                            <button (click)="sendEmail()" class="btn btn-info" type="button" style="background-color: #00bcd4;">
+                                <img src="../../assets/img/loading3.gif" *ngIf="loading" />
+                                Enviar Email
+                            </button>
+                        </div>
+                    </form>
+
+                    <form id="formParam" [formGroup]="registerForm" style="display: none;">
+                        <div class="form-row">
                             <div class="col-12 mb-2">
-                                <input type="email" class="form-control" formControlName="emailNovo" placeholder="Email Novo"
-                                    [ngClass]="{ 'is-invalid': submitted && f.emailNovo.errors }">
+                                <input type="email" class="form-control" formControlName="emailNovo" placeholder="Email Novo" [ngClass]="{ 'is-invalid': submitted && f.emailNovo.errors }">
                                 <div *ngIf="submitted && f.emailNovo.errors" class="invalid-feedback">
                                     <div *ngIf="f.emailNovo.errors.required">Digite seu email</div>
                                     <div *ngIf="f.emailNovo.errors.email">Digite um email válido</div>
@@ -29,16 +42,14 @@
                             </div>
                         </div>
                         <div class="col-12 mt-3 text-center">
-                            <button  routerLink="/home" class="btn btn-secundary" type="button">
+                            <button routerLink="/home" class="btn btn-secundary" type="button">
                                 Voltar
                             </button>
-                            <button (click)="updateBtnClick()" class="btn btn-info" type="button"
-                                style="background-color: #00bcd4;">
+                            <button (click)="updateBtnClick()" class="btn btn-info" type="button" style="background-color: #00bcd4;">
                                 <img src="../../assets/img/loading3.gif" *ngIf="loading" />
                                 Update
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
